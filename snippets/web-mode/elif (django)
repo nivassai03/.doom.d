@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name:elif (django)
+# key:elif
+# --
+{% elif $1 %}

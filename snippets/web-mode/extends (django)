@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name:extends (django)
+# key:extends
+# --
+{% extends '$1' %}
