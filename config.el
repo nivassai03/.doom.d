@@ -97,3 +97,37 @@
   )
 
 (add-hook! 'web-mode-hook 'detect-django-project)
+
+
+(defun open-file-split-window ()
+  "Open file with `projectile-find-file' in a split window bellow."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (projectile-find-file  t))
+
+(defun open-file-vsplit-window ()
+  "Open file with `projectile-find-file' in a split window right."
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (projectile-find-file t))
+
+(defun open-file-bellow-all ()
+  "Split the current buffer horizontally with new window bellow all other one.
+The size ratio is 60 (top) to 40 (bottom).
+Credit: https://emacs.stackexchange.com/a/60459/30874."
+  (interactive)
+  (split-window
+   (frame-root-window)
+   (truncate
+    (* (window-total-height (frame-root-window)) 0.60)) 'below))
+
+
+(map! :leader
+      :nv "p o" nil
+      (:prefix-map ("p" . "project")
+       (:prefix ("o" . "open")
+        (:desc "Open file in vsplit" "v" #'open-file-vsplit-window
+         :desc "Open file in split" "s" #'open-file-split-window
+         :desc "Open file below all" "S" #'open-file-below-all))))
